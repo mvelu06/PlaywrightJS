@@ -9,11 +9,11 @@ module.exports = defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 2 : undefined,
   reporter: [
-    'list',
+    ['list'],
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
   ],
   use: {
-    baseURL: process.env.BASE_URL || 'https://example.com',
+    baseURL: process.env.BASE_URL || 'https://practicetestautomation.com/practice-test-login/',
     actionTimeout: 0,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',

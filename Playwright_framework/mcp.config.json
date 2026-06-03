@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "node",
+      "args": ["mcp-server.js"],
+      "env": {
+        "BASE_URL": "https://practicetestautomation.com/practice-test-login/",
+        "TEST_USER": "student",
+        "TEST_PASS": "Password123"
+      }
+    }
+  }
+}
