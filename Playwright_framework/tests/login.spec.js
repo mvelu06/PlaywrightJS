@@ -20,7 +20,7 @@ test.describe('Practice Test Automation - Login Tests', () => {
     // Verify success message is displayed
     const successMsg = await loginPage.getSuccessMessage();
     expect(successMsg).toBeTruthy();
-    expect(successMsg.toLowerCase()).toContain('congratulations');
+    expect(successMsg).toMatch(/congratulations.*successfully logged in/i);
     
     // Verify logout button is displayed
     const isLogoutVisible = await loginPage.isLogoutButtonVisible();
@@ -34,7 +34,7 @@ test.describe('Practice Test Automation - Login Tests', () => {
     // Verify error message is displayed
     const errorMsg = await loginPage.getErrorMessage();
     expect(errorMsg).toBeTruthy();
-    expect(errorMsg).toContain('Your username is invalid');
+    expect(errorMsg).toContain('Your username is invalid!');
     
     // Verify still on login page
     const url = await loginPage.getCurrentUrl();

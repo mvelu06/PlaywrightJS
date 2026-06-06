@@ -5,9 +5,9 @@ class LoginPage {
     this.username = page.locator('#username');
     this.password = page.locator('#password');
     this.submit = page.locator('#submit');
-    this.errorMessage = page.locator('[class*="error"]');
+    this.errorMessage = page.locator(':has-text("is invalid")');
     this.logoutButton = page.locator('a:has-text("Log out")');
-    this.successMessage = page.locator('h1, h2, p:has-text("Congratulations"), p:has-text("successfully logged in")');
+    this.successMessage = page.locator('strong:has-text("Congratulations")');
   }
 
   async goto() {
@@ -25,8 +25,10 @@ class LoginPage {
 
   async getErrorMessage() {
     try {
-      await this.errorMessage.waitFor({ timeout: 5000 });
-      return await this.errorMessage.textContent();
+      const element = this.errorMessage;
+      await element.waitFor({ state: 'visible', timeout: 5000 });
+      const text = await element.innerText();
+      return text?.trim() || null;
     } catch {
       return null;
     }
@@ -43,7 +45,8 @@ class LoginPage {
   async getSuccessMessage() {
     try {
       await this.successMessage.waitFor({ timeout: 5000 });
-      return await this.successMessage.textContent();
+      const text = await this.successMessage.textContent();
+      return text?.trim() || null;
     } catch {
       return null;
     }
